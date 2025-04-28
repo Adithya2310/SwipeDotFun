@@ -1,0 +1,71 @@
+
+import React from 'react';
+import Logo from './Logo';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+const NavBar: React.FC = () => {
+  const { isAuthenticated, logout } = useAuth();
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    return location.pathname === path ? 'text-neon-blue neon-text' : 'text-white hover:text-neon-purple transition-colors';
+  };
+
+  return (
+    <header className="glassmorphic fixed top-0 left-0 right-0 z-50">
+      <div className="container mx-auto py-4 px-4 flex items-center justify-between">
+        <Link to="/" className="flex items-center space-x-2">
+          <Logo />
+          <span className="font-orbitron text-2xl font-bold text-transparent bg-clip-text bg-gradient-neon">
+            CoinSwipe
+          </span>
+        </Link>
+        
+        <nav className="hidden md:flex items-center space-x-8">
+          {isAuthenticated ? (
+            <>
+              <Link to="/categories" className={`font-orbitron ${isActive('/categories')}`}>
+                Categories
+              </Link>
+              <Link to="/swipe" className={`font-orbitron ${isActive('/swipe')}`}>
+                Swipe
+              </Link>
+              <Link to="/portfolio" className={`font-orbitron ${isActive('/portfolio')}`}>
+                Portfolio
+              </Link>
+              <button 
+                onClick={logout} 
+                className="neon-button"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className={`font-orbitron ${isActive('/login')}`}>
+                Login
+              </Link>
+              <Link to="/register" className="neon-button">
+                Register
+              </Link>
+            </>
+          )}
+        </nav>
+        
+        {/* Mobile menu button */}
+        <div className="md:hidden">
+          <button className="text-white p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default NavBar;

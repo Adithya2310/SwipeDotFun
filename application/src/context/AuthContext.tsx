@@ -1,8 +1,9 @@
-
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+"use client"
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   user: User | null;
@@ -14,11 +15,12 @@ interface AuthContextType {
   updateDefaultBuyAmount: (amount: number) => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     // Check active sessions and sets the user
@@ -37,48 +39,63 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
+      if (error) throw error;
+      router.push('/categories');
+    } catch (error) {
+      toast.error("Failed to login");
       throw error;
     }
   };
 
   const register = async (email: string, password: string, defaultBuyAmount: number) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          default_buy_amount: defaultBuyAmount,
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            default_buy_amount: defaultBuyAmount,
+          },
         },
-      },
-    });
+      });
 
-    if (error) {
+      if (error) throw error;
+      router.push('/categories');
+    } catch (error) {
+      toast.error("Failed to register");
       throw error;
     }
   };
 
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      router.push('/');
+    } catch (error) {
       toast.error("Error signing out");
+      throw error;
     }
   };
 
   const updateDefaultBuyAmount = async (amount: number) => {
     if (!user) return;
 
-    const { error } = await supabase
-      .from('profiles')
-      .update({ default_buy_amount: amount })
-      .eq('id', user.id);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ default_buy_amount: amount })
+        .eq('id', user.id);
 
-    if (error) {
+      if (error) throw error;
+      toast.success("Updated default buy amount");
+    } catch (error) {
       toast.error("Failed to update default buy amount");
       throw error;
     }
@@ -103,7 +120,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;

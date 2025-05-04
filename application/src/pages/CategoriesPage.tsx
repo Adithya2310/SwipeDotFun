@@ -1,6 +1,6 @@
-
+"use client";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useTokens } from "../context/TokenContext";
 import { TokenCategory } from "../types";
 
@@ -38,11 +38,11 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
 
 const CategoriesPage = () => {
   const { setCurrentCategory } = useTokens();
-  const navigate = useNavigate();
+  const router = useRouter();
   
   const handleCategorySelect = (category: TokenCategory) => {
     setCurrentCategory(category);
-    navigate("/swipe");
+    router.push("/swipe");
   };
   
   return (
@@ -146,7 +146,7 @@ const CategoriesPage = () => {
                        hover:shadow-neon-purple hover:scale-105 flex flex-col justify-center items-center"
             onClick={() => {
               setCurrentCategory(null);
-              navigate("/swipe");
+              router.push("/swipe");
             }}
           >
             <div className="w-16 h-16 rounded-full bg-black/50 flex items-center justify-center mb-4">

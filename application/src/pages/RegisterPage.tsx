@@ -1,13 +1,13 @@
-
+"use client"
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { toast } from "sonner";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { register } = useAuth();
   
   const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ const RegisterPage = () => {
     try {
       await register(email, password, defaultBuyAmount);
       toast.success("Registration successful! Welcome to CoinSwipe.");
-      navigate("/categories");
+      router.push("/categories");
     } catch (error) {
       console.error("Registration error:", error);
       toast.error("Failed to register. Please try again.");
@@ -195,7 +195,7 @@ const RegisterPage = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-white/70">
               Already have an account?{" "}
-              <Link to="/login" className="text-neon-blue hover:text-neon-purple font-medium">
+              <Link href="/login" className="text-neon-blue hover:text-neon-purple font-medium">
                 Sign in
               </Link>
             </p>

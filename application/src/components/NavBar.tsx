@@ -1,21 +1,23 @@
+"use client";
 
 import React from 'react';
 import Logo from './Logo';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 
 const NavBar: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();
-  const location = useLocation();
+  const pathname = usePathname();
 
   const isActive = (path: string) => {
-    return location.pathname === path ? 'text-neon-blue neon-text' : 'text-white hover:text-neon-purple transition-colors';
+    return pathname === path ? 'text-neon-blue neon-text' : 'text-white hover:text-neon-purple transition-colors';
   };
 
   return (
     <header className="glassmorphic fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto py-4 px-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           <Logo />
           <span className="font-orbitron text-2xl font-bold text-transparent bg-clip-text bg-gradient-neon">
             CoinSwipe
@@ -25,13 +27,13 @@ const NavBar: React.FC = () => {
         <nav className="hidden md:flex items-center space-x-8">
           {isAuthenticated ? (
             <>
-              <Link to="/categories" className={`font-orbitron ${isActive('/categories')}`}>
+              <Link href="/categories" className={`font-orbitron ${isActive('/categories')}`}>
                 Categories
               </Link>
-              <Link to="/swipe" className={`font-orbitron ${isActive('/swipe')}`}>
+              <Link href="/swipe" className={`font-orbitron ${isActive('/swipe')}`}>
                 Swipe
               </Link>
-              <Link to="/portfolio" className={`font-orbitron ${isActive('/portfolio')}`}>
+              <Link href="/portfolio" className={`font-orbitron ${isActive('/portfolio')}`}>
                 Portfolio
               </Link>
               <button 
@@ -43,10 +45,10 @@ const NavBar: React.FC = () => {
             </>
           ) : (
             <>
-              <Link to="/login" className={`font-orbitron ${isActive('/login')}`}>
+              <Link href="/login" className={`font-orbitron ${isActive('/login')}`}>
                 Login
               </Link>
-              <Link to="/register" className="neon-button">
+              <Link href="/register" className="neon-button">
                 Register
               </Link>
             </>

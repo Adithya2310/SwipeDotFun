@@ -1,12 +1,13 @@
-
+"use client"
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { login } = useAuth();
   
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ const LoginPage = () => {
     try {
       await login(email, password);
       toast.success("Login successful! Welcome back.");
-      navigate("/categories");
+      router.push("/categories");
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Failed to login. Please check your credentials.");
@@ -136,7 +137,7 @@ const LoginPage = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-white/70">
               Don't have an account?{" "}
-              <Link to="/register" className="text-neon-blue hover:text-neon-purple font-medium">
+              <Link href="/register" className="text-neon-blue hover:text-neon-purple font-medium">
                 Sign up
               </Link>
             </p>

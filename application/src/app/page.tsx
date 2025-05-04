@@ -1,11 +1,11 @@
 
+"use client"
 import React from "react";
-import Link from "next/link";
 import Logo from "../components/Logo";
 import { useAuth } from "../context/AuthContext";
-import "./globals.css";
+import Link from "next/link";
 
-const LandingPage = () => {
+const Page = () => {
   const { isAuthenticated } = useAuth();
   
   return (
@@ -29,7 +29,7 @@ const LandingPage = () => {
               </h1>
             </div>
             
-            <h2 className="font-orbitron text-xl md:text-3xl text-white text-center max-w-2xl mb-12">
+            <h2 className="font-orbitron text-xl md:text-3xl text-white text-center max-w-2xl mb-6">
               Discover Crypto Like Never Before
             </h2>
             
@@ -41,19 +41,19 @@ const LandingPage = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               {isAuthenticated ? (
                 <>
-                  <Link to="/categories" className="neon-button">
+                  <Link href="/categories" className="neon-button">
                     Explore Categories
                   </Link>
-                  <Link to="/swipe" className="neon-button">
+                  <Link href="/swipe" className="neon-button">
                     Start Swiping
                   </Link>
                 </>
               ) : (
                 <>
-                  <Link to="/register" className="neon-button">
+                  <Link href="/register" className="neon-button">
                     Get Started
                   </Link>
-                  <Link to="/login" className="neon-button">
+                  <Link href="/login" className="neon-button">
                     Login
                   </Link>
                 </>
@@ -121,10 +121,10 @@ const LandingPage = () => {
                 Join thousands of traders discovering new opportunities every day with CoinSwipe.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link to="/register" className="neon-button">
+                <Link href="/register" className="neon-button">
                   Create Account
                 </Link>
-                <Link to="/login" className="neon-button">
+                <Link href="/login" className="neon-button">
                   Sign In
                 </Link>
               </div>
@@ -152,4 +152,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Page;

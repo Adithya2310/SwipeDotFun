@@ -1,16 +1,17 @@
-
+"use client"
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import Logo from './Logo';
 
 const MobileNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, logout } = useAuth();
-  const location = useLocation();
+  const pathname = usePathname();
 
   const isActive = (path: string) => {
-    return location.pathname === path ? 'text-neon-blue neon-text' : 'text-white hover:text-neon-purple transition-colors';
+    return pathname === path ? 'text-neon-blue neon-text' : 'text-white hover:text-neon-purple transition-colors';
   };
 
   const handleLogout = () => {
@@ -37,21 +38,21 @@ const MobileNav: React.FC = () => {
             {isAuthenticated ? (
               <>
                 <Link 
-                  to="/categories" 
+                  href="/categories" 
                   className={`font-orbitron text-center py-3 text-xl ${isActive('/categories')}`}
                   onClick={() => setIsOpen(false)}
                 >
                   Categories
                 </Link>
                 <Link 
-                  to="/swipe" 
+                  href="/swipe" 
                   className={`font-orbitron text-center py-3 text-xl ${isActive('/swipe')}`}
                   onClick={() => setIsOpen(false)}
                 >
                   Swipe
                 </Link>
                 <Link 
-                  to="/portfolio" 
+                  href="/portfolio" 
                   className={`font-orbitron text-center py-3 text-xl ${isActive('/portfolio')}`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -67,14 +68,14 @@ const MobileNav: React.FC = () => {
             ) : (
               <>
                 <Link 
-                  to="/login" 
+                  href="/login" 
                   className={`font-orbitron text-center py-3 text-xl ${isActive('/login')}`}
                   onClick={() => setIsOpen(false)}
                 >
                   Login
                 </Link>
                 <Link 
-                  to="/register" 
+                  href="/register" 
                   className="neon-button w-full mt-4"
                   onClick={() => setIsOpen(false)}
                 >
@@ -87,7 +88,7 @@ const MobileNav: React.FC = () => {
       )}
 
       <div className="glassmorphic flex items-center justify-around py-3">
-        <Link to="/" className={`flex flex-col items-center ${isActive('/')}`} onClick={() => setIsOpen(false)}>
+        <Link href="/" className={`flex flex-col items-center ${isActive('/')}`} onClick={() => setIsOpen(false)}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -97,9 +98,9 @@ const MobileNav: React.FC = () => {
         
         {isAuthenticated && (
           <>
-            <Link to="/categories" className={`flex flex-col items-center ${isActive('/categories')}`} onClick={() => setIsOpen(false)}>
+            <Link href="/categories" className={`flex flex-col items-center ${isActive('/categories')}`} onClick={() => setIsOpen(false)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 3h.393a7.5 7.5 0 007.92 12.446A7.5 7.5 0 0119.5 19H4.5A7.5 7.5 0 013.687 15.446 7.5 7.5 0 0011.607 3H12z"></path>
+                <path d="M12 3h.393a7.5 7.5 0 007.92 12.446A7.5 7.5 0 0019.5 19H4.5A7.5 7.5 0 003.687 15.446 7.5 7.5 0 0011.607 3H12z"></path>
                 <path d="M8 16l.01-0"></path>
                 <path d="M12 16l.01-0"></path>
                 <path d="M16 16l.01-0"></path>
@@ -107,7 +108,7 @@ const MobileNav: React.FC = () => {
               <span className="text-xs mt-1">Categories</span>
             </Link>
             
-            <Link to="/swipe" className={`flex flex-col items-center ${isActive('/swipe')}`} onClick={() => setIsOpen(false)}>
+            <Link href="/swipe" className={`flex flex-col items-center ${isActive('/swipe')}`} onClick={() => setIsOpen(false)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16.5 2.5L21 8L16.5 13.5"></path>
                 <path d="M21 8H9C7.61929 8 6.5 9.11929 6.5 10.5V10.5C6.5 11.8807 7.61929 13 9 13H12"></path>
@@ -117,7 +118,7 @@ const MobileNav: React.FC = () => {
               <span className="text-xs mt-1">Swipe</span>
             </Link>
             
-            <Link to="/portfolio" className={`flex flex-col items-center ${isActive('/portfolio')}`} onClick={() => setIsOpen(false)}>
+            <Link href="/portfolio" className={`flex flex-col items-center ${isActive('/portfolio')}`} onClick={() => setIsOpen(false)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
                 <path d="M16 2v4"></path>

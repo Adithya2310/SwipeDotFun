@@ -1,8 +1,8 @@
-
+"use client"
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import { motion, useAnimation, PanInfo } from "framer-motion";
 import { useTokens } from "../context/TokenContext";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Token } from "../types";
 import TokenCard from "../components/TokenCard";
 
@@ -159,10 +159,10 @@ const SwipePage = () => {
                 You've gone through all available tokens in this category.
               </p>
               <div className="flex flex-col space-y-4">
-                <Link to="/categories" className="neon-button">
+                <Link href="/categories" className="neon-button">
                   Explore Other Categories
                 </Link>
-                <Link to="/portfolio" className="neon-button">
+                <Link href="/portfolio" className="neon-button">
                   View Your Portfolio
                 </Link>
               </div>

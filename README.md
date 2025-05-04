@@ -105,15 +105,13 @@ Each swipe card provides essential token details:
 
 ## **Demo Video**
 
-[Demo Video Link](#) _(Replace with the actual demo link)_
+[Demo Video Link](https://www.canva.com/design/DAGmd4Oo_P4/82QvcYKmK47Lsmdqg2Y6mA/edit?utm_content=DAGmd4Oo_P4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ---
 
 ## **Deployment Links**
 
-- **Live App:** [SwipeDotFun Platform](https://justswipe.vercel.app/)
-- **Frontend Repository:** [GitHub Repository](https://github.com/lokeshwaran100/justswipe/application)
-- **Smart Contract Repository:** [GitHub Repository](https://github.com/lokeshwaran100/justswipe)
+- **Live App:** [SwipeDotFun Platform](https://swipedotfun-pharosbuilderbasecamp.vercel.app/)
 
 ---
 

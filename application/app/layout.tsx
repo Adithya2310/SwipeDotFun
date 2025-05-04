@@ -12,9 +12,9 @@ import { Menu } from '@/components/ui/menu'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CoinSwipe - Crypto Trading Made Simple",
+  title: "Swipe ● Fun - Crypto Trading Made Simple",
   description: "Swipe right on your next crypto investment",
-  metadataBase: new URL("https://coinswipe.example.com"),
+  metadataBase: new URL("https://Swipe ● Fun.example.com"),
 };
 
 export default function RootLayout({

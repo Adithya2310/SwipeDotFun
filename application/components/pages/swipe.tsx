@@ -11,7 +11,7 @@ import { addCoinToPortfolio } from "@/lib/dbOperations";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { HfInference } from "@huggingface/inference";
-const inference = new HfInference("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");
+const inference = new HfInference(process.env.NEXT_PUBLIC_HUGGING_FACE_API);
 
 import { gql, request } from "graphql-request";
 const query = gql`

@@ -122,8 +122,7 @@ Each swipe card provides essential token details:
 | **Name**      | **Role**                 | **Email**                 | **Twitter**                                     |
 | ------------- | ------------------------ | ------------------------- | ----------------------------------------------- |
 | Lokeshwaran B | Smart Contract Developer | lokeshwaran100@gmail.com  | [@cryptowithloki](https://x.com/cryptowithloki) |
-| Adithya NG    | Frontend Developer       | adithyanandi009@gmail.com | [@\_Adithya_n_g](https://x.com/_Adithya_n_g)    |
-| Dharshan S    | Full Stack Developer     | dharshan2457@gmail.com    | [@capGoblin](https://x.com/capGoblin)           |
+| Adithya NG    | Frontend Developer       | adithyanandi009@gmail.com | [@\_Adithya_n_g]                                |
 
 ---
 
